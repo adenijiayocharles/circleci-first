@@ -42,3 +42,4 @@ workflows:
       - print-world:
           requires:
             - print-hello
+      - print_name
