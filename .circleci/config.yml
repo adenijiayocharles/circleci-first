@@ -34,6 +34,15 @@ jobs:
             echo $MY_NAME
             echo $MY_SCHOOL
 
+  save_hello_word_output:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - run:
+          name: "Print hello world to a file"
+          command: |
+            echo "this is the text output to the file" >> output.txt
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -45,3 +54,4 @@ workflows:
           requires:
             - print-hello
       - print_name
+      - save_hello_word_output
