@@ -43,7 +43,7 @@ jobs:
           command: |
             echo "this is the text output to the file" >> output.txt
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
             - output.txt
   print_to_workspace:
@@ -51,7 +51,7 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - attach_workspace:
-          at: ./
+          at: ~/
       - run:
           name: "Read the contents of a file saved to the workspace in the save_hello_world_output job"
           command: |
