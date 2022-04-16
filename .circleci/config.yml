@@ -42,6 +42,20 @@ jobs:
           name: "Print hello world to a file"
           command: |
             echo "this is the text output to the file" >> output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - output.txt
+  print_to_workspace:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Read the contents of a file saved to the workspace in the save_hello_world_output job"
+          command: |
+            cat output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -55,3 +69,6 @@ workflows:
             - print-hello
       - print_name
       - save_hello_word_output
+      - print_to_workspace:
+          requires:
+            - save_hello_word_output
