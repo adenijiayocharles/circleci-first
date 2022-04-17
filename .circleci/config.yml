@@ -1,32 +1,33 @@
 version: 2.1
+defaults: &defaults
+  docker:
+  - image: cimg/base:2020.01
+
+
 jobs:
   say-hello:
-    docker:
-      - image: cimg/base:stable
+    <<: *defaults
     steps:
       - checkout
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
   print-hello:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - run:
           name: "Print Hello"
           command: "echo Hello"
 
   print-world:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - run:
           name: "Print Nigeria"
           command: "echo world and this is my pipeline id << pipeline.id >>"
 
   print_name:
-    docker:
-      - image: cimg/base:2020.01
+    <<: *defaults
     steps:
       - run:
           name: "Print environment variable in project settings"
@@ -35,8 +36,7 @@ jobs:
             echo $MY_SCHOOL
 
   save_hello_word_output:
-    docker:
-      - image: cimg/base:2020.01
+    <<: *defaults
     steps:
       - run:
           name: "Print hello world to a file"
@@ -47,8 +47,7 @@ jobs:
           paths:
             - output.txt
   print_to_workspace:
-    docker:
-      - image: cimg/base:2020.01
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ./
