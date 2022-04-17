@@ -3,6 +3,10 @@ defaults: &defaults
   docker:
     - image: cimg/base:2020.01
 
+images: &images
+  docker:
+    - image: cimg/base:2020.01
+
 jobs:
   say-hello:
     <<: *defaults
@@ -35,7 +39,7 @@ jobs:
             echo $MY_SCHOOL
 
   save_hello_word_output:
-    <<: *defaults
+    <<: *images
     steps:
       - run:
           name: "Print hello world to a file"
@@ -46,7 +50,7 @@ jobs:
           paths:
             - output.txt
   print_to_workspace:
-    <<: *defaults
+    <<: *images
     steps:
       - attach_workspace:
           at: ./
