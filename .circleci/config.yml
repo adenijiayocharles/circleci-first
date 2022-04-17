@@ -1,8 +1,7 @@
 version: 2.1
 defaults: &defaults
   docker:
-  - image: cimg/base:2020.01
-
+    - image: cimg/base:2020.01
 
 jobs:
   say-hello:
@@ -41,7 +40,7 @@ jobs:
       - run:
           name: "Print hello world to a file"
           command: |
-            echo "this is the text output to the file" >> output.txt
+            echo "this is the text output to the file after using defaults" >> output.txt
       - persist_to_workspace:
           root: ./
           paths:
